@@ -27,7 +27,7 @@ export default function StatForm() {
         const playerNames = formData.player_name;
         const namesArray = playerNames.split(',').map(name => name.trim());
         const data = await getStats({ player_names: namesArray });
-        console.log(namesArray);
+        // console.log(namesArray);
         setStats(data);
     }
 
