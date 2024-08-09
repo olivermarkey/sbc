@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { getStats } from "@/server/stats";
 
 const GetStatsSchema = z.object({
     player_name: z.string().min(1).max(100),
@@ -32,8 +33,7 @@ export default function StatForm() {
     });
 
     const onSubmit = async (formData: z.infer<typeof GetStatsSchema>) => {
-        const result = await fetch(`http://b8c40s8.143.198.70.30.sslip.io/api/PlayerDataTotals/name/${formData.player_name}`);
-        const data = await result.text()
+        const data = await getStats(formData.player_name);
         setStats(data);
     }
 
