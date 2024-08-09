@@ -55,10 +55,10 @@ export default function StatForm() {
                     </Button>
                 </form>
             </Form>
-            {stats && (
+            {stats.length > 0 && (
                 <>
                     <div className="my-4">
-                        {!!stats && <DownloadCsv jsonData={stats} />}
+                        <DownloadCsv jsonData={stats} />
                     </div>
                     <div className="mt-4 max-w-screen-sm">
                         <h2 className="text-xl font-bold mb-2">Player Stats</h2>
