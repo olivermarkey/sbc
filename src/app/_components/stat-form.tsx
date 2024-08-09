@@ -10,7 +10,7 @@ import { getStats } from "@/server/stats";
 import DownloadCsv, { PlayerStats } from "./download-csv";
 
 const GetStatsSchema = z.object({
-    player_name: z.string().min(1).max(100),
+    player_name: z.string().min(1),
 });
 
 
@@ -24,7 +24,10 @@ export default function StatForm() {
     });
 
     const onSubmit = async (formData: z.infer<typeof GetStatsSchema>) => {
-        const data = await getStats(formData.player_name);
+        const playerNames = formData.player_name;
+        const namesArray = playerNames.split(',').map(name => name.trim());
+        const data = await getStats({ player_names: namesArray });
+        console.log(namesArray);
         setStats(data);
     }
 
